@@ -1,4 +1,5 @@
-export const dictionary={
+import {termDefinitions} from './curriculum.js?v=4';
+export const dictionary={...termDefinitions,
 '要求分析':'何を解決したいかを探す作業。「組立手順を伝えたい」が要求。CADで製品の使い道を決める段階に似ています。',
 '要件定義':'要求を、作って確かめられる条件にする作業。「3つのSTLを登録できる」「順番を変えられる」など。',
 '受入条件':'完成したと認めるための具体的な試し方と期待結果。「保存したJSONを開くと同じ位置に戻る」など。',

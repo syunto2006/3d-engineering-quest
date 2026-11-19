@@ -1,4 +1,4 @@
-import {chapters,lessons} from './curriculum.js';
+import {chapters,lessons} from './curriculum.js?v=4';
 export {chapters,lessons};
 export const $=s=>document.querySelector(s);
 export const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -10,7 +10,7 @@ export function allowed(id){return id===0||state.done.includes(id-1)}
 export function nextId(){return Math.min(lessons.length-1,lessons.findIndex(l=>!state.done.includes(l.id))<0?63:lessons.findIndex(l=>!state.done.includes(l.id)))}
 export function saveFile(name,text,type='text/plain'){const url=URL.createObjectURL(new Blob([text],{type}));const a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),5000)}
 export function header(active){return `<header><a class="brand" href="index.html">▧ <span>3D ENGINEERING <b>QUEST</b></span></a><nav><a ${active==='home'?'aria-current="page"':''} href="index.html">学習マップ</a><a ${active==='drill'?'aria-current="page"':''} href="drill.html?id=${nextId()}">ドリル</a><a ${active==='workshop'?'aria-current="page"':''} href="workshop.html">制作室</a><a ${active==='guide'?'aria-current="page"':''} href="guide.html">用語・使い方</a></nav><span class="tag">BUILD YOUR OWN APP</span></header>`}
-export async function baseFiles(){return (await fetch('base.json').then(r=>{if(!r.ok)throw Error('初期ファイルを読めません');return r.json()}))}
+export async function baseFiles(){return (await fetch('base.json?v=4').then(r=>{if(!r.ok)throw Error('初期ファイルを読めません');return r.json()}))}
 export async function projectFiles(){return {...await baseFiles(),...state.project}}
 export async function referenceFiles(){const f=await baseFiles();for(const l of lessons)f[l.file]=l.mode==='replace'?l.solution:(f[l.file]||'')+'\n'+l.solution;return f}
 // ZIP (store): 外部ライブラリに依存せず、完成したソースをディレクトリごと書き出す。
