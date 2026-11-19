@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="ja">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>組立ビューア</title><link rel="stylesheet" href="style.css"><script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"}}</script></head>
+<body>
+<h1>組立ビューア</h1>
+<div id="app"></div>
+<section id="home"><h2>STLから組立手順をつくろう</h2><p>部品を登録し、並べて再生する作業場です。</p><button id="open-workshop">作業場を開く</button></section>
+<section id="workshop" hidden><h2>組立作業場</h2><button id="back-home">ホームへ戻る</button><div id="viewport" aria-label="3Dビュー"></div></section>
+<section id="file-panel"><label>STLファイル <input id="stl-files" type="file" accept=".stl" multiple></label><button id="sample">練習用CubeSatを開く</button><p id="status" role="status">ファイルを選んでください</p></section>
+<aside id="part-panel"><h2>部品一覧</h2><div id="part-list"></div><div id="inspector"></div></aside><section id="timeline-panel"><h2>組立手順</h2><ol id="steps"></ol><button id="play">再生</button><button id="stop">停止</button><input id="timeline" type="range" min="0" max="1" step="0.01" value="0" aria-label="再生位置"></section>
+<!-- ここに画面を追加 -->
+<script type="module" src="app.js"></script>
+</body>
+</html>
