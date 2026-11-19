@@ -1,0 +1,86 @@
+solid educational_cubesat
+ facet normal 0.0 0.0 -1.0
+  outer loop
+   vertex -50 -50 -50
+   vertex -50 50 -50
+   vertex 50 50 -50
+  endloop
+ endfacet
+ facet normal 0.0 0.0 -1.0
+  outer loop
+   vertex -50 -50 -50
+   vertex 50 50 -50
+   vertex 50 -50 -50
+  endloop
+ endfacet
+ facet normal 0.0 0.0 1.0
+  outer loop
+   vertex -50 -50 50
+   vertex 50 -50 50
+   vertex 50 50 50
+  endloop
+ endfacet
+ facet normal 0.0 0.0 1.0
+  outer loop
+   vertex -50 -50 50
+   vertex 50 50 50
+   vertex -50 50 50
+  endloop
+ endfacet
+ facet normal 0.0 -1.0 0.0
+  outer loop
+   vertex -50 -50 -50
+   vertex 50 -50 -50
+   vertex 50 -50 50
+  endloop
+ endfacet
+ facet normal 0.0 -1.0 0.0
+  outer loop
+   vertex -50 -50 -50
+   vertex 50 -50 50
+   vertex -50 -50 50
+  endloop
+ endfacet
+ facet normal 0.0 1.0 0.0
+  outer loop
+   vertex -50 50 -50
+   vertex -50 50 50
+   vertex 50 50 50
+  endloop
+ endfacet
+ facet normal 0.0 1.0 0.0
+  outer loop
+   vertex -50 50 -50
+   vertex 50 50 50
+   vertex 50 50 -50
+  endloop
+ endfacet
+ facet normal -1.0 0.0 0.0
+  outer loop
+   vertex -50 -50 -50
+   vertex -50 -50 50
+   vertex -50 50 50
+  endloop
+ endfacet
+ facet normal -1.0 0.0 0.0
+  outer loop
+   vertex -50 -50 -50
+   vertex -50 50 50
+   vertex -50 50 -50
+  endloop
+ endfacet
+ facet normal 1.0 0.0 0.0
+  outer loop
+   vertex 50 -50 -50
+   vertex 50 50 -50
+   vertex 50 50 50
+  endloop
+ endfacet
+ facet normal 1.0 0.0 0.0
+  outer loop
+   vertex 50 -50 -50
+   vertex 50 50 50
+   vertex 50 -50 50
+  endloop
+ endfacet
+endsolid educational_cubesat

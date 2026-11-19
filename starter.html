@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>自分のCubeSatビューア</title>
+<style>body{margin:0;background:#101c2d;color:#e8f3ff;font:16px sans-serif}header{padding:20px}h1{font-size:24px}button{font:inherit;padding:10px;margin:4px;background:#b5f46b;border:0;border-radius:6px;cursor:pointer}#view{height:65vh;min-height:300px}canvas{display:block}#status{padding:0 20px}a{color:#b5f46b}</style>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"}}</script></head>
+<body><header><h1>自分のCubeSatビューア</h1><p>ドラッグで回転、ホイール・ピンチで拡大</p><button id="transparent">半透明を切り替える</button><button id="wire">骨組みを切り替える</button><button id="reset">視点を戻す</button></header><p id="status" role="status">STLを読み込み中…</p><div id="view"></div>
+<script type="module">
+// 1. 3Dライブラリと、STL読み込み・マウス操作の機能を読み込む
+import * as THREE from 'three';
+import { STLLoader } from 'three/addons/loaders/STLLoader.js';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+const view = document.querySelector('#view');
+const status = document.querySelector('#status');
+try {
+// 2. 空間・カメラ・描画装置を用意する
+const scene = new THREE.Scene();
+scene.background = new THREE.Color('#101c2d');
+const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 2000);
+camera.position.set(220, 160, 240);
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+view.appendChild(renderer.domElement);
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+// 3. 照明と材質。ここを変更すると見た目が変わる
+scene.add(new THREE.HemisphereLight(0xcceeff, 0x334455, 2));
+const light = new THREE.DirectionalLight(0xffffff, 3);
+light.position.set(100, 200, 150);
+scene.add(light);
+const material = new THREE.MeshStandardMaterial({
+  color: '#55c6d9', roughness: 0.4, metalness: 0.3
+});
+// 内部を表す別の物体。STLに入っているわけではない
+const board = new THREE.Mesh(new THREE.BoxGeometry(70, 4, 70),
+  new THREE.MeshStandardMaterial({ color: '#b5f46b' }));
+scene.add(board);
+let mesh;
+// 4. 同じフォルダに置いたcubesat.stlを読み込む
+new STLLoader().load('./cubesat.stl', geometry => {
+  geometry.center();
+  mesh = new THREE.Mesh(geometry, material);
+  scene.add(mesh);
+  status.textContent = '読み込み完了。100 mmの学習用の箱です。';
+}, undefined, () => {
+  status.textContent = 'STLを読めません。ファイル名・置き場所を確認し、GitHub Pagesまたはローカルサーバーで開いてください。';
+});
+// 5. ボタンの操作と材質の設定をつなぐ
+document.querySelector('#transparent').addEventListener('click', () => {
+  material.transparent = !material.transparent;
+  material.opacity = material.transparent ? 0.35 : 1;
+  material.depthWrite = !material.transparent;
+  material.needsUpdate = true;
+});
+document.querySelector('#wire').addEventListener('click', () => {
+  material.wireframe = !material.wireframe;
+});
+document.querySelector('#reset').addEventListener('click', () => {
+  camera.position.set(220, 160, 240);
+  controls.target.set(0, 0, 0);
+  controls.update();
+});
+// 6. 画面の大きさを合わせ、繰り返し描く
+function resize() {
+  renderer.setSize(view.clientWidth, view.clientHeight);
+  camera.aspect = view.clientWidth / view.clientHeight;
+  camera.updateProjectionMatrix();
+}
+addEventListener('resize', resize);
+resize();
+renderer.setAnimationLoop(() => {
+  controls.update();
+  renderer.render(scene, camera);
+});
+} catch (error) {
+  status.textContent = '3Dを開始できません。WebGL対応ブラウザを使ってください。';
+  console.error(error);
+}
+</script><script>setTimeout(()=>{if(!document.querySelector('canvas'))document.querySelector('#status').textContent='ライブラリを読めません。ネット接続とCDNへのアクセスを確認してください。'},15000)</script></body></html>
