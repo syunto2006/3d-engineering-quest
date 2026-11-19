@@ -1,5 +1,5 @@
 import {chapters,lessons,state,$,esc,header,allowed,persist,projectFiles} from './common.js';
-import {runProject} from './runner.js';
+import {runProject} from './runner.js?v=3';
 import {dictionary} from './glossary.js';
 $('#header').innerHTML=header('drill');const requested=Number(new URLSearchParams(location.search).get('id')||0),id=Number.isInteger(requested)&&requested>=0&&requested<64?requested:0,l=lessons[id];
 if(!allowed(id)){$('#drill').hidden=true;$('#locked').hidden=false;$('#locked').innerHTML='<div class="panel"><h1>🔒 まだ開いていない課題です</h1><p>ひとつ前の課題をクリアすると、この課題が開きます。</p><a class="primary" href="index.html">学習マップに戻る</a></div>'}else{await init()}
