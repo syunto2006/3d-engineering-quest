@@ -1,4 +1,4 @@
-import {state,$,header,persist,projectFiles,referenceFiles,zipFiles} from './common.js?v=6';
+import {state,$,header,persist,projectFiles,referenceFiles,zipFiles} from './common.js?v=7';
 import {runProject} from './runner.js?v=4';
 $('#header').innerHTML=header('workshop');const reference=new URLSearchParams(location.search).get('mode')==='reference';const files=reference?await referenceFiles():await projectFiles();let current='app.js',run=0;
 $('#title').textContent=reference?'完成するアプリを触ってみよう':'自分の制作室';$('#modeNote').textContent=reference?'完成見本を実行中。自分の進捗・コードには影響しません。サンプルCubeSatや複数STLで、目指す機能を試せます。':'自分がクリアしたコードを実行中。まだ作っていない機能は、これからドリルで増えていきます。';$('#editorNote').textContent=reference?'完成見本のコードです。編集はこの画面内の実験として反映され、自分の作品には保存されません。':'編集は自分のプロジェクトに保存されます。';$('#fileSelect').innerHTML=Object.keys(files).map(p=>`<option>${p}</option>`).join('');$('#fileSelect').value=current;

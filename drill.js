@@ -1,5 +1,5 @@
 import {prepareInitial,applyLessonSolution} from './kit-steps.js?v=5';
-import {chapters,lessons,state,$,esc,header,allowed,persist,projectFiles} from './common.js?v=6';
+import {chapters,lessons,state,$,esc,header,allowed,persist,projectFiles} from './common.js?v=7';
 import {runProject} from './runner.js?v=4';
 import {dictionary} from './glossary.js?v=4';
 $('#header').innerHTML=header('drill');const requested=Number(new URLSearchParams(location.search).get('id')||0),id=Number.isInteger(requested)&&requested>=0&&requested<64?requested:0,l=lessons[id];
