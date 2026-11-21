@@ -2360,3 +2360,6 @@ export const termDefinitions = {
   "README": "作品の説明書として置くファイル。起動方法・使い方・制約・保存方法を伝えます。",
   "HTTPサーバー": "ブラウザへファイルや応答を届ける仕組み。HTMLのダブルクリックと違い、URLを通じてSTLも読み込めます。"
 };
+
+import {extraChapters,extraLessons} from './advanced.js?v=9';
+chapters.push(...extraChapters);lessons.push(...extraLessons);
